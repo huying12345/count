@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>js实现是计时器</title>
+</head>
+<body>
+<script src="include/jquery.min.js"></script>
+<script type="text/javascript">
+    var caution=false
+    function setCookie(name,value,expires,path,domain,secure)
+    {
+        var curCookie=name+"="+escape(value) +
+                ((expires)?";expires="+expires.toGMTString() : "") +
+                ((path)?"; path=" + path : "") +
+                ((domain)? "; domain=" + domain : "") +
+                ((secure)?";secure" : "")
+        if(!caution||(name + "=" + escape(value)).length <= 4000)
+        {
+            document.cookie = curCookie
+        }
+        else if(confirm("Cookie exceeds 4KB and will be cut!"))
+        {
+            document.cookie = curCookie
+        }
+    }
+    function getCookie(name)
+    {
+        var prefix = name + "="
+        var cookieStartIndex = document.cookie.indexOf(prefix)
+        if (cookieStartIndex == -1)
+        {
+            return null
+        }
+        var cookieEndIndex=document.cookie.indexOf(";",cookieStartIndex+prefix.length)
+        if(cookieEndIndex == -1)
+        {
+            cookieEndIndex = document.cookie.length
+        }
+        return unescape(document.cookie.substring(cookieStartIndex+prefix.length,cookieEndIndex))
+    }
+    function deleteCookie(name, path, domain)
+    {
+        if(getCookie(name))
+        {
+            document.cookie = name + "=" +
+                    ((path) ? "; path=" + path : "") +
+                    ((domain) ? "; domain=" + domain : "") +
+                    "; expires=Thu, 01-Jan-70 00:00:01 GMT"
+        }
+    }
+    function fixDate(date)
+    {
+        var base=new Date(0)
+        var skew=base.getTime()
+        if(skew>0)
+        {
+            date.setTime(date.getTime()-skew)
+        }
+    }
+    var now=new Date()
+    fixDate(now)
+    now.setTime(now.getTime()+365 * 24 * 60 * 60 * 1000)
+    var visits = getCookie("counter")
+    if(!visits)
+    {
+        visits=1;
+    }
+    else
+    {
+        visits=parseInt(visits)+1;
+    }
+    setCookie("counter", visits, now)
+    document.write("您是到访的第" + visits + "位用户！");
+    
+//创建文件
+function sum(){
+	var fso;
+	try { 
+		fso=new ActiveXObject("Scripting.FileSystemObject"); 
+	} catch (e) { 
+		alert("当前浏览器不支持");
+		return;
+	} 
+	var f1 = fso.createtextfile("D:\Program Files\Apache Software Foundation\Apache24\htdocs\计数器\count.txt",true);
+//写入文件
+	f1.write("这是您创建的一个文本文档"); 
+	var openf1 = fso.OpenTextFile("D:\Program Files\Apache Software Foundation\Apache24\htdocs\计数器\count.txt");
+	str = openf1.ReadLine();
+	alert("里面的内容为'" + str + "'");
+}
+    
+</script>
+<button onclick="sum()">访问量</button>
+</body>
+</html>
