@@ -8,7 +8,7 @@
 <html>
 	<head>
 		<meta charset="utf-8"/>
-		<title>JSP计时器</title>
+		<title>JSP计数器</title>
 	</head>
 	<body>
 <%

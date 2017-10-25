@@ -2,12 +2,13 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>js实现是计时器</title>
+    <title>js实现的计数器</title>
 </head>
 <body>
 <script src="include/jquery.min.js"></script>
 <script type="text/javascript">
-    var caution=false
+    //
+    var caution=false;
     function setCookie(name,value,expires,path,domain,secure)
     {
         var curCookie=name+"="+escape(value) +
@@ -24,6 +25,7 @@
             document.cookie = curCookie
         }
     }
+    //
     function getCookie(name)
     {
         var prefix = name + "="
@@ -71,26 +73,26 @@
         visits=parseInt(visits)+1;
     }
     setCookie("counter", visits, now)
-    document.write("您是到访的第" + visits + "位用户！");
+    document.write("<p style='text-align: center;'>欢迎！您是到访的第<b style='color:red;'>" + visits + "</b>位用户！</p>");
     
 //创建文件
-function sum(){
-	var fso;
-	try { 
-		fso=new ActiveXObject("Scripting.FileSystemObject"); 
-	} catch (e) { 
-		alert("当前浏览器不支持");
-		return;
-	} 
-	var f1 = fso.createtextfile("D:\Program Files\Apache Software Foundation\Apache24\htdocs\计数器\count.txt",true);
-//写入文件
-	f1.write("这是您创建的一个文本文档"); 
-	var openf1 = fso.OpenTextFile("D:\Program Files\Apache Software Foundation\Apache24\htdocs\计数器\count.txt");
-	str = openf1.ReadLine();
-	alert("里面的内容为'" + str + "'");
-}
+//function sum(){
+//	var fso;
+//	try {
+//		fso=new ActiveXObject("Scripting.FileSystemObject");
+//	} catch (e) {
+//		alert("当前浏览器不支持");
+//		return;
+//	}
+//	var f1 = fso.createtextfile("D:\Program Files\Apache Software Foundation\Apache24\htdocs\计数器\count.txt",true);
+////写入文件
+//	f1.write("这是您创建的一个文本文档");
+//	var openf1 = fso.OpenTextFile("D:\Program Files\Apache Software Foundation\Apache24\htdocs\计数器\count.txt");
+//	str = openf1.ReadLine();
+//	alert("里面的内容为'" + str + "'");
+//}
     
 </script>
-<button onclick="sum()">访问量</button>
+<!--<button onclick="sum()">访问量</button>-->
 </body>
 </html>
